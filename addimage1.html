@@ -16,7 +16,7 @@
     }
 
     .container {
-      width: 500px;
+      width: 600px;
       max-height: 95vh;
       border: 3px solid black;
       background-color: white;
@@ -25,6 +25,7 @@
       align-items: center;
       box-sizing: border-box;
       overflow: auto;
+      padding: 10px;
     }
 
     .logo {
@@ -40,7 +41,6 @@
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
-      margin-top: 10px;
       margin-bottom: 5px;
     }
 
@@ -53,31 +53,30 @@
 
     .box-container {
       width: 100%;
-    }
-
-    .row {
       display: flex;
-      width: 100%;
-      margin-bottom: 5px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .box {
       border: 2px solid black;
-      flex: 1;
+      flex: 1 1 45%;
+      min-width: 45%;
+      min-height: 100px;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 12px;
       font-weight: bold;
+      background-color: white; /* No color */
       padding: 5px;
-      height: 50px;
+      box-sizing: border-box;
     }
 
     .box-form {
-      padding: 10px;
-      height: auto;
+      flex-direction: column;
+      align-items: flex-start;
       overflow-y: auto;
-      width: 100%;
     }
 
     .form-container {
@@ -138,10 +137,19 @@
       background-color: #45a049;
     }
 
-</style>
-<script>
+    /* Specific sizes for boxes */
+    .small-box {
+      min-height: 80px;
+    }
 
-  function validateForm(event) {
+    .large-box {
+      min-height: 180px;
+    }
+
+</style>
+
+<script>
+function validateForm(event) {
     event.preventDefault();
 
     var fullname = document.getElementById("fullname").value.trim();
@@ -155,21 +163,18 @@
     var city = document.getElementById("city").value;
     var terms = document.getElementById("terms").checked;
 
-    
     var emailPattern = /^[0-9]{2}-[0-9]{5}-[0-9]@student\.aiub\.edu$/;
     if (!emailPattern.test(email)) {
       alert("Email must be like: 22-49199-3@student.aiub.edu");
       return false;
     }
 
-    
     var namePattern = /^(Mr|Ms)\.[A-Z][a-z]+(?:\s[A-Z][a-z]+)*$/;
     if (!namePattern.test(fullname)) {
       alert("Full Name must be like: Mr.Mehedi Hasan or Ms.Sadia Rahman. No numbers allowed.");
       return false;
     }
 
-   
     var dobPattern = /^(\d{2})\/(\d{2})\/(\d{4})$/;
     if (!dobPattern.test(dob)) {
       alert("Date of Birth must be in DD/MM/YYYY format.");
@@ -192,7 +197,6 @@
       return false;
     }
 
-   
     if (password.length < 8) {
       alert("Password must be at least 8 characters long.");
       return false;
@@ -203,13 +207,11 @@
       return false;
     }
 
-   
     if (zipcode.length < 4) {
       alert("Zip Code must be at least 4 characters long.");
       return false;
     }
 
-    
     if (!fullname || !email || !password || !confirmPassword || !dob || !gender || !location || !zipcode || !city || !terms) {
       alert("Please fill all fields.");
       return false;
@@ -218,23 +220,24 @@
     document.getElementById("fullname").value = fullname;
     alert("Form submitted successfully!");
     document.getElementById("registrationForm").submit();
-  }
-
+}
 </script>
+
 </head>
+
 <body>
 
   <div class="container">
     <div class="logo">AIUB</div>
     <div class="title">Aiub Student Registration Form</div>
+
     <div class="box-container">
-      <div class="row">
-        <div class="box">Box 1</div>
-        <div class="box">Box 2</div>
-      </div>
-      <div class="row">
-        <div class="box box-form">
-          <form id="registrationForm" class="form-container" onsubmit="validateForm(event)">
+      
+      <!-- First Row -->
+      <div class="box small-box">Box 1</div>
+
+      <div class="box box-form">
+        <form id="registrationForm" class="form-container" onsubmit="validateForm(event)">
             <label for="fullname">Full Name:</label>
             <input type="text" id="fullname" name="fullname" required>
 
@@ -282,11 +285,15 @@
             </div>
 
             <button type="submit" class="submit-btn">Submit</button>
-          </form>
-        </div>
-        <div class="box">Box 4</div>
+        </form>
       </div>
+
+      <!-- Second Row -->
+      <div class="box large-box">Box 3</div>
+      <div class="box">Box 4</div>
+
     </div>
+
   </div>
 
 </body>
