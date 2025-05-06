@@ -68,7 +68,7 @@
       align-items: center;
       font-size: 12px;
       font-weight: bold;
-      background-color: white; /* No color */
+      background-color: white; 
       padding: 5px;
       box-sizing: border-box;
     }
@@ -137,7 +137,7 @@
       background-color: #45a049;
     }
 
-    /* Specific sizes for boxes */
+    
     .small-box {
       min-height: 80px;
     }
@@ -237,7 +237,8 @@ function validateForm(event) {
       <div class="box small-box">Box 1</div>
 
       <div class="box box-form">
-        <form id="registrationForm" class="form-container" onsubmit="validateForm(event)">
+        <form id="registrationForm" class="form-container" method="post" action="process.php" onsubmit="validateForm(event)">
+
             <label for="fullname">Full Name:</label>
             <input type="text" id="fullname" name="fullname" required>
 
